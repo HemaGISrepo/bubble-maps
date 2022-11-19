@@ -1,0 +1,18 @@
+# Create a base map
+m_4 = folium.Map(location=[42.32,-71.0589], tiles='cartodbpositron', zoom_start=13)
+
+def color_producer(val):
+    if val <= 12:
+        return 'forestgreen'
+    else:
+        return 'darkred'
+
+# Add a bubble map to the base map
+for i in range(0,len(daytime_robberies)):
+    Circle(
+        location=[daytime_robberies.iloc[i]['Lat'], daytime_robberies.iloc[i]['Long']],
+        radius=20,
+        color=color_producer(daytime_robberies.iloc[i]['HOUR'])).add_to(m_4)
+
+# Display the map
+m_4
